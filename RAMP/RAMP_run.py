@@ -34,7 +34,7 @@ from post_process import*
 # In this default example, the model runs for 2 input files ("input_file_1", "input_file_2"),
 # but single or multiple files can be run restricting or enlarging the iteration range 
 # and naming further input files with progressive numbering
-for j in range(1,4):
+for j in range(2,3):
     Profiles_list = Stochastic_Process(j)
     
 # Post-processes the results and generates plots
@@ -49,7 +49,7 @@ for j in range(1,4):
         Profiles_avg_test.to_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Avg_Profiles/Profiles_avg_%d.xlsx' % j) # In questo modo sono riuscito ad estrapolare il profilo medio di una giornata tipo
 ### What if we try to do all the analysis inside this cyle without the need of writing every thing two times?
 
-###Analisi su i profili medi per estrapolare informazioni fondamentali tipo max min etc
+#%%Analisi su i profili medi per estrapolare informazioni fondamentali tipo max min etc
 
 df1 = pd.read_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Avg_Profiles/Profiles_avg_1.xlsx')
 df2 = pd.read_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Avg_Profiles/Profiles_avg_2.xlsx')
@@ -103,15 +103,52 @@ Stat_avg_fund = pd.DataFrame(prova1)
 prova1.columns = ['useless', 'values'] #todo try to rename also the rows
 prova1.to_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Avg_Profiles/Describe_concat_fundamental_stat_avg.xlsx')  ### Ricorda che il primo si riferisce a Profilo 1 poi sotto hai il Profilo 2
 
-### Statistical important data for the output results
+#%% Statistical important data for the output results
+import pandas as pd
 
-data1 = pd.read_csv('../results/output_file_1.csv')
-data2 = pd.read_csv('../results/output_file_2.csv')
-data3 = pd.read_csv('../results/output_file_3.csv')
+data1 = pd.read_csv('C:/Users/pietr/Spyder/RAMP_spyder/results/output_file_1.csv',index_col=0)
+data2 = pd.read_csv('C:/Users/pietr/Spyder/RAMP_spyder/results/output_file_2.csv', index_col=0)
+data3 = pd.read_csv('C:/Users/pietr/Spyder/RAMP_spyder/results/output_file_3.csv', index_col=0)
 
-data_prova = pd.DataFrame(data1)
+#%% Transforming the temporal resolution
 
-data1_sum = data_prova.sum(axis=0)  #non funziona!!! l'unica cosa che è diversa da sopra è che qui è stato tutto salvato come CVS ma non dovrebbe essere un problema
+#FIRST METHOD 
+
+df =  pd.DataFrame(data2)
+test = df.iloc[0:,0]
+
+s = 0
+z = 0 
+mean_minuts_to_hours =[]
+
+for i in test :
+    z = z+1 # counting the indexes   
+    if z % 60 == 0 :
+        test = df.iloc[s:z,0]
+        a = (test.values.sum(axis=0))/z
+        s = z 
+        mean_minuts_to_hours.append(a)
+
+#mean_minuts_to_hours.to_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Results_output_profiles/Demand_adjusted .xlsx')
+     
+
+#%% Second method
+data2 = pd.read_csv('C:/Users/pietr/Spyder/RAMP_spyder/results/output_file_2.csv', index_col=0)
+index = pd.date_range(start=0,periods = len(data2), 
+                                   freq=('1min'))
+
+data2.index = index
+
+data2['hours']= data2.index.hour
+data2['days']= data2.index.dayofyear
+
+
+data_hourly = data2.groupby([data2.index.hour]).mean() 
+
+    
+
+#%%
+data1_sum = data1.sum(axis=0) 
 data2_sum = data2.sum(axis=0)
 data3_sum = data3.sum(axis=0)
 print(data1_sum)
@@ -138,9 +175,7 @@ desc3 = data3.describe()
 assessment_desc1 = pd.DataFrame(desc1)
 assessment_desc2 = pd.DataFrame(desc2)
 assessment_desc3 = pd.DataFrame(desc2)
-assessment_desc1.columns = ['useless', 'values']
-assessment_desc2.columns = ['useless', 'values']
-assessment_desc3.columns = ['useless', 'values']
+
 assessment_desc1.to_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Results_output_profiles/Statistical_data_desc1.xlsx')
 assessment_desc2.to_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Results_output_profiles/Statistical_data_desc2.xlsx')
 assessment_desc3.to_excel(r'C:\Users\pietr\PycharmProjects\Thesis_RAMP\VLIR_Energy_Demand-main\Statistical_analysis\Results_output_profiles/Statistical_data_desc3.xlsx')
