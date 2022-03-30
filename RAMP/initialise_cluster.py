@@ -6,7 +6,6 @@ from core import np
 import importlib
 
 #%% Modifications in order not to being albe to use the cluster
-'''
 import re
 # This section extracts the values of Scenarios, Periods, Years from data.dat and creates ranges for them
 Data_file = "C:/Users/pietr/Spyder/Conference/RAMP_Bolivia/cluster/data.dat"
@@ -16,7 +15,6 @@ for i in range(len(Data_import)):
     if "param: num_profiles" in Data_import[i]:
         days = int((re.findall('\d+',Data_import[i])[0]))
         
-'''        
 #%%
 
 def yearly_pattern():
@@ -43,8 +41,8 @@ def Initialise_model():
     '''
     The model is ready to be initialised
     '''
-    #num_profiles = days
-    num_profiles = int(input("please indicate the number of profiles to be generated: ")) #asks the user how many profiles (i.e. code runs) he wants
+    num_profiles = days
+    #num_profiles = int(input("please indicate the number of profiles to be generated: ")) #asks the user how many profiles (i.e. code runs) he wants
     print('Please wait...') 
     Profile = [] #creates an empty list to store the results of each code run, i.e. each stochastically generated profile
     

@@ -4,6 +4,7 @@
 import numpy as np
 import numpy.ma as ma
 import pandas as pd
+
 #%% Definition of Python classes that constitute the model architecture
 '''
 The code is based on two concatenated python classes, namely 'User' and

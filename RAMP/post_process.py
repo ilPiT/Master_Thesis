@@ -39,8 +39,9 @@ def Profile_cloud_plot(stoch_profiles,stoch_profiles_avg):
         plt.margins(y=0)
     plt.plot(np.arange(1440),stoch_profiles_avg,'#4169e1')
     plt.xticks([0,240,480,(60*12),(60*16),(60*20),(60*24)],[0,4,8,12,16,20,24])
-    #plt.savefig('profiles.eps', format='eps', dpi=1000)
+    plt.savefig('profiles_avg.png')
     plt.show()
+        
 
 
 def Profile_series_plot(stoch_profiles_series):
@@ -56,15 +57,39 @@ def Profile_series_plot(stoch_profiles_series):
     #plt.xticks([0,240,480,(60*12),(60*16),(60*20),(60*24)],[0,4,8,12,16,20,24])
     #plt.savefig('profiles.eps', format='eps', dpi=1000)
     plt.show()
-
+    
+    
 #%% Export individual profiles --> what does it mean??
-'''
-for i in range (len(Profile)):
-    np.save('p0%d.npy' % (i), Profile[i])
-'''
-
 # Export Profiles
+
 def export_series(stoch_profiles_series, j):
     series_frame = pd.DataFrame(stoch_profiles_series)
     series_frame.to_csv('../results/output_file_%d.csv' % (j))
+    
+    
+#%% Try to add the datascience stuff here and see if it works
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

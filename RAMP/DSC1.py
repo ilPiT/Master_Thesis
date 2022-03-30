@@ -1,4 +1,4 @@
-1# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Created on Wed May 26 11:16:36 2021
 
@@ -14,18 +14,18 @@ User_list = []
 
 class community:
     
-    def __init__(self, Alt, P, PPH, PR, Dist):
+    def __init__(self, Alt, P, PPH, PR):
         self.Altitude = Alt
         self.Population = P
         self.People_per_household = PPH 
         self.Poverty_rate = PR
-        self.Distance_from_other_comm = Dist  #which kind of unit of measure ? km?
+        
 
 Alt = int(input("Altitude:")) #altitudeMasl
 P = int(input("Population:")) #Population
 PPH = int(input("Population per household:"))  #PeoplePerHousehold
 PR = float(input("Poverty rate:")) #PovertyRate
-Dist = int(input("Distance from the nearest bigger community:")) #DistanceFromAnotherCommunity(hours)
+
 
 
 LI = int(round(P/PPH)*PR) #Low Income Household
@@ -44,10 +44,9 @@ else: #highlands housegolds
     #Health facilities
 
 if (P < 500):
-    if (Dist < 2):
-        pass
-    else:
-        HP = User("Health post", 1)
+          
+    
+        HP = User("Health post", 0)
         User_list.append(HP)
     
 elif (500 < P <1000):
@@ -60,9 +59,7 @@ else:
     #Schools
 
 if (P < 100):
-    if (Dist < 1):
-       pass
-    else:
+    # Remember that this is a strong assumtpion that for this moment does not consider the distance from the biggest city
         S1 = User("School type 1", 1)
         User_list.append(S1)
 elif (100 < P < 500):
@@ -258,7 +255,7 @@ else:  #highlands households
 #Health facilities
 
 if (P < 500):
-    if (Dist > 2):
+    
         HP_indoor_bulb = HP.Appliance(HP,12,7,2,690,0.2,10)
         HP_indoor_bulb.windows([480,720],[870,1440],0.35)
 
@@ -312,8 +309,7 @@ if (P < 500):
         HP_Fridge3.specific_cycle_2(150,15,5,15)
         HP_Fridge3.specific_cycle_3(150,10,5,20)
         HP_Fridge3.cycle_behaviour([580,1200],[0,0],[420,479],[0,0],[0,419],[1201,1440])
-    else:
-        pass
+
         
 elif (500 < P <1000):
     HP_indoor_bulb = HP.Appliance(HP,12,7,2,690,0.2,10)
@@ -452,9 +448,7 @@ else:
     
 #Schools
 if (P < 100):
-    if (Dist < 1):
-        pass
-    else:
+        
         S1_indoor_bulb = S1.Appliance(S1,6,7,2,120,0.25,30)
         S1_indoor_bulb.windows([480,780],[840,1140],0.2)
 
