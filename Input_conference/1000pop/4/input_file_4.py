@@ -18,7 +18,7 @@ User_list = []
 #Definig users IRRIGATION WATER
 
 
-IW = User("Irrigation Water", 27)
+IW = User("Irrigation Water", 18)
 User_list.append(IW)
 
 #Appliances
@@ -50,7 +50,7 @@ LAU_BT.windows([300,1440],[0,0],0.35)
 
 #Definig users GROCERY STORE
 
-GS = User("Grocery Store 1", 16)
+GS = User("Grocery Store 1", 11)
 User_list.append(GS)
 
 #Appliances
@@ -72,7 +72,7 @@ GS_Radio.windows([390,450],[1140,1260],0.35)
 
 #Definig users RESTAURANT
 
-R = User("Restaurant", 16)
+R = User("Restaurant", 11)
 User_list.append(R)
 
 #Appliances
@@ -93,7 +93,7 @@ R_freezer.cycle_behaviour([480,1200],[0,0],[300,479],[0,0],[0,299],[1201,1440])
 
 #Definig users ENTERTAINMENT BUSINESS
 
-EB = User("Entertainment Business", 8)
+EB = User("Entertainment Business", 5)
 User_list.append(EB)
 
 #Appliances
@@ -124,7 +124,7 @@ EB_freezer.cycle_behaviour([480,1200],[0,0],[300,479],[0,0],[0,299],[1201,1440])
 
 #Definig users WORKSHOP
 
-WS = User("Workshop", 8)
+WS = User("Workshop", 5)
 User_list.append(WS)
 
 #Appliances
