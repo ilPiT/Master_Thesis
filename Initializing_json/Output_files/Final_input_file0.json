@@ -1,0 +1,23 @@
+[
+    {
+        "People_per_household": 3.1,
+        "Poverty_rate": 54,
+        "num_profiles": 3,
+        "Alt": 1164,
+        "Pop": 141,
+        "House_number": 45,
+        "Low_income": 24,
+        "High_income": 21,
+        "Elevation_transition": 3000,
+        "n_Public_lighting": 4,
+        "n_Water_system": 0
+    },
+    {
+        "n_LL_agro_productive_unit": 1,
+        "n_LL_irrigation_water": 2,
+        "n_LL_grocery_store": 2,
+        "n_LL_restaurant": 2,
+        "n_LL_workshop": 1,
+        "n_LL_entertainment_business": 1
+    }
+]
