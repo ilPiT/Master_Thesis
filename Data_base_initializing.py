@@ -15,7 +15,7 @@ import os
 import matplotlib.lines as mlines
 
 
-data_base = pd.read_csv('C:/Users/pietr/Spyder/Data_base_work/Database_new_1.csv')
+data_base = pd.read_csv('C:/Users/pietr/Spyder/RAMP_spyder/All_data_base_claudia/Database_new.csv')
 data_base_CNPV2012 = pd.read_excel('C:/Users/pietr/Spyder/RAMP_spyder/All_data_base_claudia/CNPV2012.xlsx') # Area : Rural or Urban 
 data_base_Population_poverty2012 = pd.read_excel('C:/Users/pietr/Spyder/RAMP_spyder/All_data_base_claudia/Population_Poverty2012.xlsx',sheet_name = 'Database 2012',header= 1)
 #OSS: actually it could be interesting to have a database where there are only the variables that we need to identifiy so that it could be more impactfull at first sight
@@ -149,6 +149,9 @@ columns.append(data_base_rural['TravelHours']) # travel time to large city in ho
 # GridCellArea ,ElectrificationOrder , Electrific , Actual_Elec_Status_2012 , FinalElecCode2012 , GridClassification
 
 research_data = data_base_rural[['GridCellArea','ElectrificationOrder','Electrific','Actual_Elec_Status_2012','FinalElecCode2012','GridClassification']]
+research_data_1 = data_base_rural[['CurrentMVLineDist','CurrentHVLineDist','PlannedHVLineDist','PlannedMVLineDist']]
+research_data_1 = research_data_1[research_data_1['CurrentMVLineDist']<=2] 
+ 
 
 second = data_base_rural[['Elevation','RoadDist','TravelHours']]
 
@@ -300,7 +303,7 @@ import json
 import pandas as pd
 
 
-data_base = pd.read_csv('C:/Users/pietr/Spyder/Data_base_work/Database_new_1.csv')
+data_base = pd.read_csv('C:/Users/pietr/Spyder/RAMP_spyder/All_data_base_claudia/Database_new.csv')
 data_base_validation_first_draft = pd.read_csv('C:/Users/pietr/Spyder/RAMP_spyder/All_data_base_claudia/Validation.database.csv')
 
 with open('C:/Users/pietr/Spyder/RAMP_spyder/Initializing_json/Initial_input_file/Initial_data.json','r') as f :
@@ -327,7 +330,7 @@ data['n_Water_system'] = (data['House_number']/100)
 all_input_files = list()
 for i in range(0,3):
     
-    with open('C:/Users/pietr/Spyder/RAMP_spyder/Initializing_json/Output_files/Fundamental_first_output%d.json' %i,'w') as f:  # you put a new name of the file because in this way we are creating a new file that it will be open in write mode 
+    with open('C:/Users/pietr/Spyder/RAMP_spyder/Initializing_json/Output_files/Fundamental_first_output_%d.json' %i,'w') as f:  # you put a new name of the file because in this way we are creating a new file that it will be open in write mode 
         data['Alt'] = int(data_base_validation_first_draft['Elevation'].iloc[i])
         data['Pop'] =int(data_base_validation_first_draft['Pop'].iloc[i])
         data['House_number'] = int(data['Pop']/data['People_per_household'])
@@ -416,4 +419,4 @@ with open ('C:/Users/pietr/Spyder/RAMP_spyder/Initializing_json/Output_files/Meg
     json.dump(super_dict, f, indent = 4)
             
     
-# Whattt    
+ 
