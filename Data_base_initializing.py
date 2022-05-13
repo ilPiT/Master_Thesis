@@ -392,17 +392,27 @@ for i in range(0,3):
         json.dump(d_highlands,f,indent = 4 )
         
 
+## new way to do it without increasing to match the layers fo dict
+
+
 
 
     if (data['Alt'] <= data['Elevation_transition']):
         
         with open('C:/Users/pietr/Spyder/RAMP_spyder/Initializing_json/Output_files/Final_input_file%d.json' %i, 'w') as f:
-            json.dump([data,d_lowlands],f, indent = 4)
+            #json.dump([data,d_lowlands],f, indent = 4)
+            
+            data.update(d_highlands) # how to sum one dictionary to another without creating to many layers in the structurer of the data 
+            json.dump(data,f, indent = 4)
+            
             
             
             
     else:
         with open('C:/Users/pietr/Spyder/RAMP_spyder/Initializing_json/Output_files/Final_input_file%d.json' %i, 'w') as f:
+            #json.dump([data,d_highlands],f, indent = 4)
+            
+            data.update(d_highlands)
             json.dump([data,d_highlands],f, indent = 4)
 
 
@@ -417,6 +427,11 @@ for i in range (0,3):
             
 with open ('C:/Users/pietr/Spyder/RAMP_spyder/Initializing_json/Output_files/Mega_data_input.json','w') as f :
     json.dump(super_dict, f, indent = 4)
-            
-    
+
+
+
+
+
+
+
  
