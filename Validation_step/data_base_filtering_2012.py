@@ -9,10 +9,10 @@ import pandas as pd
 from scipy import stats
 import numpy as np
 
-def filtering_database(database):
+def filtering_database(database, year): 
     
     first_filtering = database.loc[database['CATEGORY']==1]
-    second_filtering = first_filtering.loc[first_filtering['YEAR']==2012]
+    second_filtering = first_filtering.loc[first_filtering['YEAR']==year]
     third_filtering = second_filtering.loc[second_filtering['CONS_LEI_MWH']!=0] # do not really know if it is fundamental
     fourth_filtering = third_filtering[(np.abs(stats.zscore(third_filtering['CONS_LEI_MWH']))<3)]
     #df[(np.abs(stats.zscore(df[0])) < 3)]
@@ -26,7 +26,7 @@ def filtering_database(database):
 santa_cruz_real_data_base = pd.read_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments/santacruz_sd.csv')
 
 
-santa_cruz_real_data_base_filtered = filtering_database(santa_cruz_real_data_base)
+santa_cruz_real_data_base_filtered = filtering_database(santa_cruz_real_data_base,2012)
 
 santa_cruz_real_data_base_filtered.to_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments_filtered/santacruz_sd.csv')
 
@@ -37,7 +37,7 @@ santa_cruz_real_data_base_filtered.to_csv('D:/poli_new/New_step/Data_base_real/R
 cochabamba_real_data_base = pd.read_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments/cochabamba_sd.csv')
 
 
-cochabamba_real_data_base_filtered = filtering_database(cochabamba_real_data_base)
+cochabamba_real_data_base_filtered = filtering_database(cochabamba_real_data_base,2012)
 
 cochabamba_real_data_base_filtered.to_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments_filtered/cochabamba_sd.csv')
 
@@ -83,7 +83,7 @@ beni_real_data_base_filtered.to_csv('D:/poli_new/New_step/Data_base_real/Real_da
 
 potosi_real_data_base = pd.read_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments/potosi_sd.csv')
 
-potosi_real_data_base_filtered = filtering_database(potosi_real_data_base)
+potosi_real_data_base_filtered = filtering_database(potosi_real_data_base,2012)
 potosi_real_data_base_filtered.to_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments_filtered/potosi_sd.csv')
 
 
@@ -94,7 +94,7 @@ potosi_real_data_base_filtered.to_csv('D:/poli_new/New_step/Data_base_real/Real_
 
 pando_real_data_base = pd.read_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments/pando_sd.csv')
 
-pando_real_data_base_filtered = filtering_database(pando_real_data_base)
+pando_real_data_base_filtered = filtering_database(pando_real_data_base,2012)
 pando_real_data_base_filtered.to_csv('D:/poli_new/New_step/Data_base_real/Real_data_base_departments_filtered/pando_sd.csv')
 
 
